@@ -1,0 +1,1017 @@
+{
+	"info": {
+		"_postman_id": "9e8d63d4-8a7b-4a2f-a321-ee6f269cc643",
+		"name": "ServerRest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "POST - Cadastrar usuário",
+					"item": [
+						{
+							"name": "Validar Cadastro com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"var ambiente = JSON.parse(responseBody);\r",
+											"pm.environment.set(\"_id\", ambiente._id);\r",
+											"\r",
+											"pm.test('Validar status code igual a 201', function(){\r",
+											"    pm.response.to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"Cadastro realizado com sucesso\")\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de client id', function(){\r",
+											"    jasonData = pm.response.json()._id\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Sabrina Teste\",\r\n  \"email\": \"SabrinaTeste@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro com email já cadastrado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"Este email já está sendo usado\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro sem email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().email\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"email é obrigatório\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Fulano\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro sem nome",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().nome\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"nome é obrigatório\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"beltrano@qa.com.br\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro sem senha",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().password\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"password é obrigatório\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Sabrina Teste\",\r\n  \"email\": \"SabrinaTeste@qa.com.br\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro sem adm",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().administrador\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"administrador é obrigatório\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Sabrina Teste\",\r\n  \"email\": \"SabrinaTeste@qa.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Cadastro com campos diferentes do esperado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().administrador\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"administrador deve ser 'true' ou 'false'\")\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().email\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"email deve ser um email válido\")\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().nome\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"nome não pode ficar em branco\")\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().password\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"password não pode ficar em branco\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"SabrinaTesteqa.com.br\",\r\n  \"password\": \"\",\r\n  \"administrador\": \"trueeee\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - Listar usuários cadstrados",
+					"item": [
+						{
+							"name": "Validar Listar usuários cadastrados",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?_id={{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}"
+										},
+										{
+											"key": "nome",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id por nome",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?nome=Sabrina Teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Sabrina Teste"
+										},
+										{
+											"key": "email",
+											"value": "SabrinaTeste@qa.com.br",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "teste",
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id por email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?email=SabrinaTeste@qa.com.br",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Sabrina Teste",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "SabrinaTeste@qa.com.br"
+										},
+										{
+											"key": "password",
+											"value": "teste",
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id por senha",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?password=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Sabrina Teste",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "SabrinaTeste@qa.com.br",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "teste"
+										},
+										{
+											"key": "administrador",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id por adm true",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?administrador=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Sabrina Teste",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "SabrinaTeste@qa.com.br",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "teste",
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar usuários cadastrados por id por adm false",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios?administrador=false",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{_id}}",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Sabrina Teste",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "SabrinaTeste@qa.com.br",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "teste",
+											"disabled": true
+										},
+										{
+											"key": "administrador",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - Buscar usuários por ID",
+					"item": [
+						{
+							"name": "Validar Buscar usuário por ID válido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().administrador\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().email\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().nome\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().password\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de client id', function(){\r",
+											"    jasonData = pm.response.json()._id\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/{{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"{{_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Buscar usuário sem ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de usuarios', function(){\r",
+											"    jasonData = pm.response.json().usuarios\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Buscar usuário por ID inválido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"Usuário não encontrado\")\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/xxxxxx",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"xxxxxx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - Edtar usuário",
+					"item": []
+				},
+				{
+					"name": "DEL - Excluir usuário",
+					"item": [
+						{
+							"name": "Validar Delete de usuário",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/{{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"{{_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
