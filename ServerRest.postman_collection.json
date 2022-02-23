@@ -2419,13 +2419,10 @@
 											"pm.test('Validar status code igual a 200', function(){\r",
 											"    pm.response.to.have.status(200)\r",
 											"})\r",
-											"\r",
 											"pm.test('Validar retorno de mensagem', function(){\r",
 											"    jasonData = pm.response.json().message\r",
-											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Registro excluído com sucesso\")\r",
-											"})\r",
-											"\r",
-											""
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
 										],
 										"type": "text/javascript"
 									}
@@ -2904,7 +2901,7 @@
 											"\r",
 											"pm.test('Validar retorno de mensagem', function(){\r",
 											"    jasonData = pm.response.json().message\r",
-											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Não é permitido possuir produto duplicado | Não é permitido ter mais de 1 carrinho | Produto não encontrado | Produto não possui quantidade suficiente\")\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Não é permitido ter mais de 1 carrinho\")\r",
 											"})\r",
 											""
 										],
@@ -2994,6 +2991,31 @@
 					"item": [
 						{
 							"name": "Validar Listar carrinhos cadastrados",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de carrinhos', function(){\r",
+											"    jasonData = pm.response.json().carrinhos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -3030,6 +3052,258 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Validar Listar carrinhos cadastrados por id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de carrinhos', function(){\r",
+											"    jasonData = pm.response.json().carrinhos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carrinhos?_id={{id_carrinho}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carrinhos"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{id_carrinho}}"
+										},
+										{
+											"key": "precoTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "quantidadeTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "idUsuario",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar carrinhos cadastrados por preço total",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de carrinhos', function(){\r",
+											"    jasonData = pm.response.json().carrinhos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carrinhos?precoTotal=110000",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carrinhos"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "precoTotal",
+											"value": "110000"
+										},
+										{
+											"key": "quantidadeTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "idUsuario",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar carrinhos cadastrados por quantidade total",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de carrinhos', function(){\r",
+											"    jasonData = pm.response.json().carrinhos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carrinhos?quantidadeTotal=5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carrinhos"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "precoTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "quantidadeTotal",
+											"value": "5"
+										},
+										{
+											"key": "idUsuario",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Listar carrinhos cadastrados por user ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidade', function(){\r",
+											"    jasonData = pm.response.json().quantidade\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de carrinhos', function(){\r",
+											"    jasonData = pm.response.json().carrinhos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carrinhos?idUsuario={{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carrinhos"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "precoTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "quantidadeTotal",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "idUsuario",
+											"value": "{{_id}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -3038,17 +3312,61 @@
 					"item": [
 						{
 							"name": "Validar \tCarrinho encontrado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jasonData\r",
+											"\r",
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de quantidadeTotal', function(){\r",
+											"    jasonData = pm.response.json().quantidadeTotal\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de produtos', function(){\r",
+											"    jasonData = pm.response.json().produtos\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\npm.test('Validar status code igual a 200', function(){\r\n    pm.response.to.have.status(200)\r\n})\r\n\r\npm.test('Validar retorno de produtos', function(){\r\n    jasonData = pm.response.json().produtos\r\n    pm.expect(jasonData, \"mensagem\").not.undefined\r\n})\r\n\r\npm.test('Validar retorno de preço', function(){\r\n    jasonData = pm.response.json().precoTotal\r\n    pm.expect(jasonData, \"mensagem\").not.undefined\r\n})\r\npm.test('Validar retorno de id', function(){\r\n    jasonData = pm.response.json().idUsuario\r\n    pm.expect(jasonData, \"mensagem\").not.undefined\r\n})",
+									"options": {
+										"raw": {
+											"language": "javascript"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{url}}/carrinhos/{{_id}}",
+									"raw": "{{url}}/carrinhos/{{id_carrinho}}",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"carrinhos",
-										"{{_id}}"
+										"{{id_carrinho}}"
 									]
 								}
 							},
@@ -3056,17 +3374,38 @@
 						},
 						{
 							"name": "Validar \t Carrinho não encontrado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/carrinhos/{{_id}}",
+									"raw": "{{url}}/carrinhos/xxxxxxxxxxx",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"carrinhos",
-										"{{_id}}"
+										"xxxxxxxxxxx"
 									]
 								}
 							},
@@ -3079,9 +3418,35 @@
 					"item": [
 						{
 							"name": "Validar  Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Não foi encontrado carrinho para esse usuário\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{noAuth}}",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{url}}/carrinhos/concluir-compra",
 									"host": [
@@ -3097,6 +3462,26 @@
 						},
 						{
 							"name": "Validar Token ausente, inválido ou expirado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 401', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -3120,9 +3505,35 @@
 					"item": [
 						{
 							"name": "Validar  Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{url}}/carrinhos/cancelar-compra",
 									"host": [
@@ -3138,6 +3549,26 @@
 						},
 						{
 							"name": "Validar Token ausente, inválido ou expirado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 401', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -3149,6 +3580,182 @@
 									"path": [
 										"carrinhos",
 										"cancelar-compra"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Extra",
+			"item": [
+				{
+					"name": "DEL - Produtos",
+					"item": [
+						{
+							"name": "Validar excuir produto por id com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/produtos/{{id_produto}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar excuir produto por id com sucesso 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Registro excluído com sucesso\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/produtos/{{id_produto2}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto2}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DEL - Usuarios",
+					"item": [
+						{
+							"name": "Validar Delete de usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"Registro excluído com sucesso\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/{{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"{{_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Delete de usuário 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 200', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"id não retornado\").to.eql(\"Registro excluído com sucesso\")\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/{{noAuth_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"{{noAuth_id}}"
 									]
 								}
 							},
