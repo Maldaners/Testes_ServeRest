@@ -12,7 +12,7 @@ Conhecimentos gerais de automação:
  também pode ser utilizado para descrever e documentar o fluxo de uma aplicação.
  
 2 – O que são mocks, e quando devem ser utilizados?
-Mocks são formas de simular via código comportamentos reais, por exemplo, ha a necessidade de testar unitáriamnete validação de CPF, o dev "mocka" (adiciona) no teste um CPF, porém esse dado não interfere no comportamento do produto, pois ele é apenas um teste.
+Mocks são formas de simular via código comportamentos reais, por exemplo, ha a necessidade de testar unitáriamente validação de CPF, o dev "mocka" (adiciona) no teste um CPF, porém esse dado não interfere no comportamento do produto, pois ele é apenas um teste.
 
 3 – Cite 3 tipos de testes que podem ser automatizados em API e 3 para Front end.
 
