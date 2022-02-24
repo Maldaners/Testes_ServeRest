@@ -3,6 +3,7 @@ Os testes deste repositório foram feitos a partir do sistema de cógigo livre S
 com o objetivo principal de aceitar um desafio e ao mesmo tempo treinar habilidades na área de testes de software.
 
 Como ferramenta principal, foi utilizado o postman, com testes escritos em JavaScript, e com a possibilidade de rodar com o Newman. 
+*** É possivel rodar os testes localmente fazendo um clone do projeto e adicionando a collection e o environment no postman, depois acionar o runner o rodar toda a collection.
 
 
 Conhecimentos gerais de automação:
