@@ -9,7 +9,7 @@ Como ferramenta principal, foi utilizado o postman, com testes escritos em JavaS
 Conhecimentos gerais de automação:
 
 1 – Descreva o que é o padrão Page Object?
- resumidamente um padrão de design que ajuda a aprimorar a manutenção de testes e reduzir a duplicação de código, 
+É resumidamente um padrão de design que ajuda a aprimorar a manutenção de testes e reduzir a duplicação de código, 
  também pode ser utilizado para descrever e documentar o fluxo de uma aplicação.
  
 2 – O que são mocks, e quando devem ser utilizados?
@@ -19,7 +19,7 @@ Mocks são formas de simular via código comportamentos reais, por exemplo, ha a
 
 Testes que podem ser automatizados em APi são:
 I- Testes Unitários, devem ser criados desde o inicio do desenvolvimento da API e crescer junto com o código, é normalmente feito pelos próprios desenvolvedores;
-II- Testes End-to-end (E2E), podem ser automatizados pelos testesr/QAs para validar as funcionalidades da aplicação de ponta a ponta;
+II- Testes End-to-end (E2E), podem ser automatizados pelos testers/QAs para validar as funcionalidades da aplicação de ponta a ponta;
 III- Testes Regressivos (ou de regressão), são modelados e criados pelos testers/QAs para uma validação de todo o fluxo, faz com que haja uma verificação completa sempre que criada alguma alteração, assim faciltando na hora de capturar bugs e problemas.
 
 Testes que podem ser automatizados em Front end são:
