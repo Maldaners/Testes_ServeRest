@@ -9,7 +9,7 @@ phases:
 
 		build:
 		commands:
-			- newman run ServeRest.postman_collection.json -e ServeRest.postman_environment.json -r cli,junit --reporter-junit-export report/junit.xml --insecure
+			- newman run Tests/ServeRest.postman_collection.json -e Tests/ServeRest.postman_environment.json -r cli,junit --reporter-junit-export report/junit.xml --insecure
 
 reports:
 	files:
