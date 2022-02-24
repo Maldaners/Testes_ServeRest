@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9e8d63d4-8a7b-4a2f-a321-ee6f269cc643",
+		"_postman_id": "76669110-113e-4d13-9479-c0cb7cf35551",
 		"name": "ServerRest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -454,22 +454,22 @@
 									"query": [
 										{
 											"key": "_id",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "nome",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "email",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "password",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1095,48 +1095,6 @@
 											"})\r",
 											"\r",
 											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/usuarios/{{_id}}",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"usuarios",
-										"{{_id}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Validar Delete de usuário com carrinho",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test('Validar status code igual a 400', function(){\r",
-											"    pm.response.to.have.status(400)\r",
-											"})\r",
-											"\r",
-											"pm.test('Validar retorno de mensagem', function(){\r",
-											"    jasonData = pm.response.json().message\r",
-											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Não é permitido excluir usuário com carrinho cadastrado\")\r",
-											"})\r",
-											"\r",
-											"\r",
-											"pm.test('Validar retorno de id', function(){\r",
-											"    jasonData = pm.response.json().idCarrinho\r",
-											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
-											"})"
 										],
 										"type": "text/javascript"
 									}
@@ -1886,27 +1844,27 @@
 									"query": [
 										{
 											"key": "_id",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "nome",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "preco",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "descricao",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "quantidade",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -3030,22 +2988,22 @@
 									"query": [
 										{
 											"key": "_id",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "precoTotal",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "quantidadeTotal",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "idUsuario",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -3406,6 +3364,53 @@
 									"path": [
 										"carrinhos",
 										"xxxxxxxxxxx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Extra - DEL - Excluir usuário",
+					"item": [
+						{
+							"name": "Validar Delete de usuário com carrinho",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Validar status code igual a 400', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test('Validar retorno de mensagem', function(){\r",
+											"    jasonData = pm.response.json().message\r",
+											"    pm.expect(jasonData, \"mensagem\").to.eql(\"Não é permitido excluir usuário com carrinho cadastrado\")\r",
+											"})\r",
+											"\r",
+											"\r",
+											"pm.test('Validar retorno de id', function(){\r",
+											"    jasonData = pm.response.json().idCarrinho\r",
+											"    pm.expect(jasonData, \"id não retornado\").not.undefined\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/usuarios/{{_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuarios",
+										"{{_id}}"
 									]
 								}
 							},

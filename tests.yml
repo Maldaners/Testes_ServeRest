@@ -1,0 +1,18 @@
+version: 0.1
+
+phases:
+	install:
+		runtime-versions:
+			nodejs: 12
+		commands:
+		     - npm install -g newman
+
+		build:
+		commands:
+			- newman run ServeRest.postman_collection.json -e ServeRest.postman_environment.json -r cli,junit --reporter-junit-export report/junit.xml --insecure
+
+reports:
+	files:
+	- 'junit.xml'
+	base-directory: reports
+	file-format: JunitXml
